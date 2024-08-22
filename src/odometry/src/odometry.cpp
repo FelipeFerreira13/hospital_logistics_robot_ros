@@ -15,6 +15,8 @@
 #include <std_msgs/Float32.h>
 
 #include <geometry_msgs/Pose2D.h>
+#include <geometry_msgs/Vector3.h>
+
 #include <sensor_msgs/Imu.h>
 
 #include "odometry/pose_odom.h"
@@ -43,8 +45,8 @@ void rotate( double x, double y, double phi, double *v);
 
 bool reference( odometry::pose_odom::Request &req, odometry::pose_odom::Response &res );
 
-void vx_Callback(const std_msgs::Float32::ConstPtr& msg){ vx = msg->data; }
-void vy_Callback(const std_msgs::Float32::ConstPtr& msg){ vy = msg->data; }
+void vx_Callback(const std_msgs::Float32::ConstPtr& msg) { vx  = msg->data * 100.0; }   // [cm/s]
+void vy_Callback(const std_msgs::Float32::ConstPtr& msg) { vy  = msg->data * 100.0; }   // [cm/s]
 void vth_Callback(const std_msgs::Float32::ConstPtr& msg){ vth = msg->data; }
 
 void angleCallback(const std_msgs::Float32::ConstPtr& msg){navxAngle = msg->data * -1;}
@@ -62,10 +64,12 @@ int main(int argc, char** argv){
 
   ros::Subscriber angle_sub  = n.subscribe("navx/angle", 1, angleCallback);
 
-  ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("odom", 5);
+  ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("odom", 1);
   ros::Publisher imu_pub = n.advertise<sensor_msgs::Imu>("imu/data", 1);
 
-   ros::ServiceServer service = n.advertiseService("odometry/set_position", reference);
+  ros::Publisher robot_pos = n.advertise<geometry_msgs::Vector3>("robot/position", 1);
+
+  ros::ServiceServer service = n.advertiseService("odometry/set_position", reference);
   
   tf::TransformBroadcaster odom_broadcaster;
   geometry_msgs::Quaternion odom_quat;
@@ -101,6 +105,12 @@ int main(int argc, char** argv){
 
     //since all odometry is 6DOF we'll need a quaternion created from yaw
     odom_quat = tf::createQuaternionMsgFromYaw((PI/180) * th);
+
+    geometry_msgs::Vector3 pos;
+    pos.x = x;
+    pos.y = y;
+    pos.z = th;
+    robot_pos.publish( pos );
 
     imu_data.header.stamp = current_time;
     imu_data.header.frame_id = "imu_link";
@@ -153,8 +163,6 @@ int main(int argc, char** argv){
 }
 
 bool reference( odometry::pose_odom::Request &req, odometry::pose_odom::Response &res ){
-
-  ROS_INFO("Robot Position: %f, %f, %f", req.x, req.y, req.th);
 
   setPosition( req.x, req.y, req.th );
 
