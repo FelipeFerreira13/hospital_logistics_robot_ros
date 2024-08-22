@@ -23,7 +23,7 @@ SharpROS::SharpROS(ros::NodeHandle *nh, VMXPi *vmx) :
 		EXTRACT_VMX_RESOURCE_INDEX(accumulator_res_handle));
   	}
 	
-  	std::string topic_name = "channel/" + std::to_string(analog_in_chan_index) + "/sharp_ir/";
+  	std::string topic_name = "sensor/sharp_ir/" + std::to_string(analog_in_chan_index);
 	sharp_dist_pub = nh->advertise<std_msgs::Float32>(topic_name + "dist", 1);
 	raw_voltage_pub = nh->advertise<std_msgs::Float32>(topic_name + "raw", 1);
 	
