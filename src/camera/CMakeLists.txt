@@ -58,7 +58,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
+  order_board.srv
   Status.srv
+  dispensary.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -207,5 +209,11 @@ include_directories(
 # catkin_add_nosetests(test)
 
 catkin_install_python(PROGRAMS src/simple_cam.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+catkin_install_python(PROGRAMS src/order_board.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+catkin_install_python(PROGRAMS src/dispensary.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
