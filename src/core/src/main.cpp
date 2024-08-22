@@ -39,9 +39,9 @@ int main(int argc, char **argv)
 
     // set_gripper( GRIPPER_OPEN );
 
-    set_position( 30, 30, 90 );  
+    // set_position( 30, 30, 90 );  
 
-    position_driver( 100, 30, 90, "simple_move" );
+    // position_driver( 100, 30, 90, "simple_move" );
 
 
     // position_driver( 0.87, 0.75, 270, "simple_move" );
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
     // position_driver( 1.0, 1.0, 180, "simple_move" );
 
-    // read_dispensary( "yellow", 180 );
+    read_dispensary( "yellow", 180 );
 
     // ros::spinOnce();
 

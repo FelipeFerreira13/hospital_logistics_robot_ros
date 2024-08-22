@@ -297,15 +297,15 @@ public:
         
         DirectKinematics();
 
-        PID_x.setPID(0.85, 0.25, 0.0);
+        PID_x.setPID(0.85, 0.5, 0.0);
         PID_x.setPIDLimits(-0.300, 0.300);
         double x_drive = PID_x.calculate(desired_vx, vx);
 
-        PID_y.setPID(0.85, 0.25, 0.0);
+        PID_y.setPID(0.85, 0.5, 0.0);
         PID_y.setPIDLimits(-0.300, 0.300);
         double y_drive = PID_y.calculate(desired_vy, vy);
                     
-        PID_th.setPID(0.85, 0.25, 0.0);
+        PID_th.setPID(0.85, 0.5, 0.0);
         PID_th.setPIDLimits(-1.5, 1.5);
         double angle_drive = PID_th.calculate(desired_vth, vth);
 
@@ -344,7 +344,7 @@ public:
 
         reset();
 
-        ros::Rate loop_rate(5);
+        ros::Rate loop_rate(10);
 
         while (ros::ok()){
 

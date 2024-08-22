@@ -10,7 +10,7 @@ max_obstacle_height: 2.0
 raytrace_range: 1.5
 
 #The footprint of the robot 
-footprint: [[-0.25, -0.25], [-0.25, 0.25], [0.35, 0.25], [0.35, -0.25]]
+footprint: [[-0.25, -0.25], [-0.25, 0.25], [0.25, 0.25], [0.25, -0.25]]
 
 #Inscribed and circumscribed radius 
 inscribed_radius: 0.2
