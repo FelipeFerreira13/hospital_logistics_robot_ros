@@ -28,8 +28,8 @@ int main(int argc, char **argv)
 
     ros::Subscriber enc_sub = nh.subscribe("channel/3/encoder/count", 1, encCallback);
 
-    ros::Subscriber limit_high_sub = nh.subscribe("channel/8/digital_in/state", 1, limit_high_Callback);
-    ros::Subscriber limit_low_sub  = nh.subscribe("channel/9/digital_in/state", 1, limit_low_Callback );
+    ros::Subscriber limit_high_sub = nh.subscribe("/robot/digital_in/limit_switch_high/state", 1, limit_high_Callback);
+    ros::Subscriber limit_low_sub  = nh.subscribe("/robot/digital_in/limit_switch_low/state", 1, limit_low_Callback );
 
     ros::Subscriber stop_sub  = nh.subscribe("channel/10/digital_in/state", 1, stop_Callback );
 
