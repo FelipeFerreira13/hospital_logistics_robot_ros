@@ -3,6 +3,7 @@
 #include <geometry_msgs/Pose.h>
 
 #include "std_msgs/Float32.h"
+#include "std_msgs/Bool.h"
 #include <geometry_msgs/Vector3.h>
 
 #include <string.h>
@@ -22,8 +23,9 @@
 
 ros::ServiceClient move_goal_c, set_position_c, set_height_c, reset_height_c, set_gripper_c, read_order_c, read_disp_c, simple_goal_c;
 
-enum GRIPPER { GRIPPER_OPEN = 50, GRIPPER_CLOSE = 150 };
+enum GRIPPER { GRIPPER_OPEN = 70,  GRIPPER_CUBE_O = 90, GRIPPER_CUBE_C = 140, GRIPPER_CLOSE = 150 };
 
+inline bool start_button = true;
 inline double oms_height;
 inline geometry_msgs::Vector3 robot_position;
 
@@ -116,4 +118,8 @@ void positionCallback( const geometry_msgs::Vector3::ConstPtr& msg ){
     robot_position.x = msg->x;
     robot_position.y = msg->y;
     robot_position.z = msg->z;
+}
+
+void startCallback( const std_msgs::Bool::ConstPtr& msg ){
+    start_button = msg->data;
 }
