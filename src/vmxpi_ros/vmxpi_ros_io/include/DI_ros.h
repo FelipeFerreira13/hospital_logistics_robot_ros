@@ -8,6 +8,8 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
 
+#include <string.h>
+
 #include <sys/syscall.h>
 
 class DigitalInputROS : public Utils {
@@ -24,7 +26,7 @@ class DigitalInputROS : public Utils {
 
 		bool GetRawValue();
 	public:
-		DigitalInputROS(ros::NodeHandle *nh, VMXPi *vmx, uint8_t channel);
+		DigitalInputROS(ros::NodeHandle *nh, VMXPi *vmx, uint8_t channel, std::string name);
 		
 		~DigitalInputROS();
 		
