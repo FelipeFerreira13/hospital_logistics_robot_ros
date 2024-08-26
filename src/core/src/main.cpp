@@ -29,9 +29,21 @@ int main(int argc, char **argv)
 
     ros::Subscriber height_sub   = nh.subscribe("oms/height",     1, heightCallback  );
     ros::Subscriber position_sub = nh.subscribe("robot/position", 1, positionCallback);
+    ros::Subscriber start_sub    = nh.subscribe("/robot/digital_in/start_button/state", 1, startCallback);
+
 
     
     ros::Duration(10).sleep();
+    
+
+    set_gripper( GRIPPER_CUBE_O );
+
+    do{ 
+        ros::spinOnce();
+        ros::Duration(0.5).sleep();
+    }while ( !start_button );
+
+
 
     // Main Logic
 
@@ -39,12 +51,9 @@ int main(int argc, char **argv)
 
     // set_gripper( GRIPPER_OPEN );
 
-    // set_position( 30, 30, 90 );  
+    // set_position( 30, 30, 0 );  
 
-    // position_driver( 100, 30, 90, "simple_move" );
-
-
-    // position_driver( 0.87, 0.75, 270, "simple_move" );
+    // position_driver( 87, 75, 270, "simple_move" );
 
     // oms_driver( 20 );
 
@@ -69,17 +78,32 @@ int main(int argc, char **argv)
 
     // ROS_INFO("task: %c, room: %i", task_to_do, room);
 
-    // position_driver( 1.0, 1.0, 180, "simple_move" );
+    std::string cube;
+    // if     ( task_to_do == 'b' ){ cube.assign( "blue"   ); }
+    // else if( task_to_do == 'w' ){ cube.assign( "white"  ); }
+    // else if( task_to_do == 'y' ){ cube.assign( "yellow" ); }
 
-    read_dispensary( "yellow", 180 );
+    // position_driver( 90, 100, 180, "simple_move" );
 
-    // ros::spinOnce();
+    // oms_driver( 20 );
+
+
+
+    set_position( 30, 30, 180 );  
+    cube.assign( "blue"   );
+
+
+
+    read_dispensary( cube, 180 );
+
+    ros::spinOnce();
 
     // oms_driver( oms_height + 10 );
 
-    // position_driver( robot_position.x - 18, robot_position.y, 180, "simple_move" );
+    position_driver( robot_position.x - 20, robot_position.y, 180, "simple_move" );
 
-    ros::spin();
+    set_gripper( GRIPPER_CUBE_C );
+
     ros::shutdown();
 
     return 0;
