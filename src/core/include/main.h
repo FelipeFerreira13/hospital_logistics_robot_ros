@@ -13,9 +13,9 @@
 // Odometry Service
 #include "odometry/pose_odom.h"
 // OMS services
-#include "vmxpi_ros_bringup/set_height.h"
-#include "vmxpi_ros_bringup/set_gripper.h"
-#include "vmxpi_ros_bringup/reset.h"
+#include "oms/set_height.h"
+#include "oms/set_gripper.h"
+#include "oms/reset.h"
 // Camera services
 #include "camera/order_board.h"
 #include "camera/dispensary.h"
@@ -64,7 +64,7 @@ void position_driver( double x, double y, double th, std::string move_type ){
 }
 
 void oms_driver( double height ){
-    vmxpi_ros_bringup::set_height position;
+    oms::set_height position;
 
     position.request.height = height;
 
@@ -72,7 +72,7 @@ void oms_driver( double height ){
 }
 
 void reset_height( int direction ){
-    vmxpi_ros_bringup::reset reset;
+    oms::reset reset;
 
     reset.request.direction = direction;
 
@@ -80,7 +80,7 @@ void reset_height( int direction ){
 }
 
 void set_gripper( int angle ){
-    vmxpi_ros_bringup::set_gripper gripper;
+    oms::set_gripper gripper;
 
     gripper.request.angle = angle;
 

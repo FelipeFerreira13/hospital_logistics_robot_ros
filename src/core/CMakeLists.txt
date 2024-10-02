@@ -10,7 +10,7 @@ project(core)
 find_package(catkin REQUIRED COMPONENTS
   base_controller
   odometry
-  vmxpi_ros_bringup
+  oms
   camera
   roscpp
   rospy
