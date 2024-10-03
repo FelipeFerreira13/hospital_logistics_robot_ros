@@ -45,8 +45,8 @@ void rotate( double x, double y, double phi, double *v);
 
 bool reference( odometry::pose_odom::Request &req, odometry::pose_odom::Response &res );
 
-void vx_Callback(const std_msgs::Float32::ConstPtr& msg) { vx  = msg->data * 100.0; }   // [cm/s]
-void vy_Callback(const std_msgs::Float32::ConstPtr& msg) { vy  = msg->data * 100.0; }   // [cm/s]
+void vx_Callback(const std_msgs::Float32::ConstPtr& msg) { vx  = msg->data; }   // [m/s]
+void vy_Callback(const std_msgs::Float32::ConstPtr& msg) { vy  = msg->data; }   // [m/s]
 void vth_Callback(const std_msgs::Float32::ConstPtr& msg){ vth = msg->data; }
 
 void angleCallback(const std_msgs::Float32::ConstPtr& msg){navxAngle = msg->data * -1;}
