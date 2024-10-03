@@ -16,12 +16,12 @@
 
 
 
-static float linear_tolerance  = 2.5;  //  [cm]
-static float angular_tolerance = 1;  //  [degrees]
+static float linear_tolerance  = 0.015;  //  [m]
+static float angular_tolerance = 0.5;    //  [degrees]
 
 //Robot Position
-static float x_global = 0;    //Robot Global Position on the X  axis  [cm]
-static float y_global = 0;    //Robot Global Position on the Y  axis  [cm]
+static float x_global = 0;    //Robot Global Position on the X  axis  [m]
+static float y_global = 0;    //Robot Global Position on the Y  axis  [m]
 static float th_global = 0;   //Robot Global Position on the Th axis  [degrees]
 
 ros::Publisher cmd_vel_pub;

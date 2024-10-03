@@ -50,8 +50,8 @@ bool move( base_controller::move_goal::Request &req, base_controller::move_goal:
   goal.target_pose.header.stamp = ros::Time::now();
   
   // Define a position and orientation for the robot to reach
-  goal.target_pose.pose.position.x = req.x / 100.0; // [m]
-  goal.target_pose.pose.position.y = req.y / 100.0; // [m]
+  goal.target_pose.pose.position.x = req.x; // [m]
+  goal.target_pose.pose.position.y = req.y; // [m]
   goal.target_pose.pose.orientation = SetTheta(req.th);
 
    // Send the goal position and orientation for the robot to reach
@@ -93,8 +93,8 @@ bool simple_move( base_controller::move_goal::Request &req, base_controller::mov
     do{
         ros::spinOnce();
 
-        float desired_position[3] = { req.x, req.y, req.th };  // [cm], [cm], [degrees]
-        float current_position[3] = { x_global , y_global, th_global };  // [cm], [cm], [degrees]
+        float desired_position[3] = { req.x, req.y, req.th };  // [m], [m], [degrees]
+        float current_position[3] = { x_global , y_global, th_global };  // [m], [m], [degrees]
 
         float x_diff  = desired_position[0] - current_position[0];
         float y_diff  = desired_position[1] - current_position[1];
@@ -103,18 +103,22 @@ bool simple_move( base_controller::move_goal::Request &req, base_controller::mov
         if      ( th_diff < -180 ) { th_diff = th_diff + 360; }
         else if ( th_diff >  180 ) { th_diff = th_diff - 360; }
 
-        double max_linear_speed = 10.0; // cm/s
-        double max_ang_speed = 0.5;     // rad/s
+        double max_linear_speed = 0.10;   // m/s
+        double max_ang_speed = 0.75;      // rad/s
 
-        desired_vx = (x_diff / 15.0) * max_linear_speed;
+        double linear_dist_offset  = 0.15;  // [m]
+        double angular_dist_offset = 15;    // [degrees]
+
+
+        desired_vx = (x_diff / linear_dist_offset) * max_linear_speed;
         desired_vx =  std::max( std::min( desired_vx, max_linear_speed ), -1 * max_linear_speed );
         if( abs(x_diff) < linear_tolerance ){ desired_vx = 0; }
 
-        desired_vy = (y_diff / 15.0) * max_linear_speed;
+        desired_vy = (y_diff / linear_dist_offset) * max_linear_speed;
         desired_vy =  std::max(  std::min( desired_vy, max_linear_speed ), -1 * max_linear_speed );
         if( abs(y_diff) < linear_tolerance ){ desired_vy = 0; }
 
-        desired_vth = (th_diff / 15.0) * max_ang_speed; 
+        desired_vth = (th_diff / angular_dist_offset) * max_ang_speed; 
         desired_vth =  std::max(  std::min( desired_vth, max_ang_speed ), -1 * max_ang_speed );
         if( abs(th_diff) < angular_tolerance ){ desired_vth = 0; }
 
@@ -125,8 +129,8 @@ bool simple_move( base_controller::move_goal::Request &req, base_controller::mov
         ROS_INFO("vth: %f", desired_vth);
 
         geometry_msgs::Twist cmd;
-        cmd.linear.x  = desired_vx / 100.0;
-        cmd.linear.y  = desired_vy / 100.0;
+        cmd.linear.x  = desired_vx;
+        cmd.linear.y  = desired_vy;
         cmd.angular.z = desired_vth;
         cmd_vel_pub.publish( cmd );
         
