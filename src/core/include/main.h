@@ -38,20 +38,26 @@ char order_board[7][7] = {{'n', 'n', 'n', 'n', 'n', 'n', 'n'},
                           {'n', 'n', 'n', 'n', 'n', 'n', 'n'}};
 
 void set_position( double x, double y, double th ){
+
+    ROS_INFO("New Robot Position: %f, %f and %f", x, y, th);
+
     odometry::pose_odom pose;
 
-    pose.request.x = x;
-    pose.request.y = y;
+    pose.request.x = x / 100.0; // [m]
+    pose.request.y = y / 100.0; // [m]
     pose.request.th = th;
 
     set_position_c.call( pose );
 }
 
 void position_driver( double x, double y, double th, std::string move_type ){
+
+    ROS_INFO("New Goal: %f, %f and %f", x, y, th);
+
     base_controller::move_goal goal;
 
-    goal.request.x = x;
-    goal.request.y = y;
+    goal.request.x = x / 100.0; // [m]
+    goal.request.y = y / 100.0; // [m]
     goal.request.th = th;
 
     if ( move_type.compare( "move_base" ) == 0 ){
@@ -115,8 +121,8 @@ void heightCallback( const std_msgs::Float32::ConstPtr& msg ){
 }
 
 void positionCallback( const geometry_msgs::Vector3::ConstPtr& msg ){
-    robot_position.x = msg->x;
-    robot_position.y = msg->y;
+    robot_position.x = msg->x * 100.0;
+    robot_position.y = msg->y * 100.0;
     robot_position.z = msg->z;
 }
 

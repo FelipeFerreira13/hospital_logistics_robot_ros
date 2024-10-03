@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     do{ 
         ros::spinOnce();
         ros::Duration(0.5).sleep();
-    }while ( !start_button );
+    }while ( start_button );
 
 
 
@@ -51,11 +51,11 @@ int main(int argc, char **argv)
 
     set_gripper( GRIPPER_OPEN );
 
-    set_position( 34, 34, 180 );  
+    set_position   ( 34, 34, 180 );  
 
     position_driver( 34, 34, 0, "simple_move" );
 
-    position_driver( 105 + (328.0/2.0), 100, 90, "move_base" );
+    position_driver( 105 + (32.8/2.0), 100, 90, "move_base" );
 
     // oms_driver( 20 );
 
@@ -83,7 +83,7 @@ int main(int argc, char **argv)
     task_to_do = 'b';
     std::string cube(1, task_to_do);
 
-    position_driver( 200 + (650.0/2.0), 100, 90, "simple_move" );
+    position_driver( 20 + (65.0/2.0), 100, 90, "simple_move" );
 
     oms_driver( 20 );
 
@@ -95,11 +95,11 @@ int main(int argc, char **argv)
 
     oms_driver( shelf );
 
-    position_driver( robot_position.x - 20, robot_position.y, 180, "simple_move" );
+    position_driver( robot_position.x, robot_position.y + 20, 90, "simple_move" );
 
     set_gripper( GRIPPER_CUBE_C );
 
-    position_driver( robot_position.x + 20, robot_position.y, 180, "simple_move" );
+    position_driver( robot_position.x, robot_position.y - 20, 90, "simple_move" );
 
     
 
