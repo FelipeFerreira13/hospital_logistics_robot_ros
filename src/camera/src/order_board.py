@@ -121,20 +121,21 @@ def read_order(req):
             cv2.rectangle( rec, ( int(x_ + ( i * w_ / 7 )), int(y_ + ( j * h_ / 7 )) ), ( int(x_ + ( (i + 1) * w_ / 7 )), int(y_ + ( (j + 1) * h_ / 7 )) ), (0,255,0),5,cv2.LINE_AA)
               
 
-        # cv2.imshow('image', frame)
-        # cv2.imshow('hsv_board', hsv_board)
-        # cv2.imshow('hsv_blue', hsv_blue)
-        # cv2.imshow('hsv_red', hsv_red)
-        # cv2.imshow('hsv_yellow', hsv_yellow)
-        # cv2.imshow('img_crop', img_crop)
-        # cv2.imshow('rec', rec)
+        cv2.imshow('image', frame)
+        cv2.imshow('hsv_board', hsv_board)
+        cv2.imshow('hsv_blue', hsv_blue)
+        cv2.imshow('hsv_red', hsv_red)
+        cv2.imshow('hsv_yellow', hsv_yellow)
+        cv2.imshow('img_crop', img_crop)
+        cv2.imshow('rec', rec)
 
-        cv2.waitKey(1)
+        cv2.waitKey(0)
                 
         # Sleep just enough to maintain the desired rate
         rate.sleep()
     
     cap.release()
+    cv2.destroyAllWindows()
 
     print( table )
     

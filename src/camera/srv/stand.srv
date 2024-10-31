@@ -1,0 +1,4 @@
+string cube
+float32 angle
+---
+bool status

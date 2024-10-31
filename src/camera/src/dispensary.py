@@ -63,10 +63,10 @@ class disp():
 
                 
 
-                if   ( cube == 'blue' ):
+                if   ( cube == 'b' ):
                     mask = cv2.inRange( hsv, lower_blue, upper_blue )
                     area_cube = area_blue
-                elif ( cube == 'white' ):
+                elif ( cube == 'w' ):
                     mask = cv2.inRange( hsv, lower_blue, upper_blue )
                     kernel = np.ones((6,6))
                     mask_b = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel, iterations = 2)
@@ -133,7 +133,7 @@ class disp():
                     if ( speed > max_linear_speed): speed = max_linear_speed
                     vy = (( x_ - desired_x ) / abs( x_ - desired_x )) * speed
 
-                elif ( abs( y_ - desired_y ) > 10 ):
+                elif ( abs( y_ - desired_y ) > 20 ):
                     speed = (abs( y_ - desired_y ) / 35.0) * max_elevator_speed
                     if ( speed > max_elevator_speed): speed = max_elevator_speed
                     vz = (( y_ - desired_y ) / abs( y_ - desired_y )) * speed
@@ -179,7 +179,10 @@ class disp():
                     
             # Sleep just enough to maintain the desired rate
             rate.sleep()
+            
+        cap.release()
         cv2.destroyAllWindows()
+
         return True
 
 
