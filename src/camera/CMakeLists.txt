@@ -61,6 +61,7 @@ add_service_files(
   order_board.srv
   Status.srv
   dispensary.srv
+  stand.srv
 )
 
 ## Generate actions in the 'action' folder
@@ -215,5 +216,8 @@ catkin_install_python(PROGRAMS src/order_board.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 catkin_install_python(PROGRAMS src/dispensary.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+catkin_install_python(PROGRAMS src/stand.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
