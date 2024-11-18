@@ -7,6 +7,8 @@ global_costmap:
   #Set the update and publish frequency of the costmap
   update_frequency: 1.0
 
+  inflation_radius: 0.2
+
   resolution: 0.05
 
   static_map: false

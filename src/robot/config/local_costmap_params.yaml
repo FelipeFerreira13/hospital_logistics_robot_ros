@@ -8,6 +8,8 @@ local_costmap:
   update_frequency: 2.0
   publish_frequency: 2.0
 
+  inflation_radius: 0.05
+
   #Window centered at the robot
   static_map: false
   rolling_window: true

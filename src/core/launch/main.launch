@@ -1,7 +1,7 @@
 <launch>
 
     <!-- Run Lidar -->
-    <!-- <include file="$(find robot)/launch/X2.launch"/> -->
+    <include file="$(find robot)/launch/X2.launch"/>
 
     <!-- Run move_base -->
     <include file="$(find base_controller)/launch/base_controller.launch"/>
@@ -24,6 +24,6 @@
         <rosparam command="load" file="$(find robot)/config/laser_median_filter.yaml" />
     </node>
 
-    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/rviz_viewer.rviz" /> -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot)/rviz/rviz_viewer.rviz" />
 
 </launch>

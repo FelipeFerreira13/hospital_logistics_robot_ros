@@ -17,7 +17,6 @@ inscribed_radius: 0.2
 circumscribed_radius: 0.3
 
 #Cost function parameters
-inflation_radius: 0.2
 cost_scaling_factor: 5.0
 
 #The cost at which a cell is considered an obstacle when a map is read from the map_server
