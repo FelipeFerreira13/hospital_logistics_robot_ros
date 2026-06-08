@@ -7,6 +7,13 @@ The robot uses a three omni-wheel mobile base for holonomic movement and an Obje
 
 <img width="1112" height="562" alt="image" src="https://github.com/user-attachments/assets/20af8de4-b3da-41d4-ad74-4bfd00795527" />
 
+
+
+Project Documentation: https://drive.google.com/file/d/1miT9k_YCgWma2GB6V60KPX5w_I7PBsBJ/view?usp=sharing
+
+Testing and Validation:
+- https://www.youtube.com/watch?v=wKqr0rEgRGI&t=407s
+- https://www.youtube.com/watch?v=o8iod3cifyY&t=14s
 ## Dependencies
 
 This project was developed for ROS 1 and VMX-Pi-based robot control.
