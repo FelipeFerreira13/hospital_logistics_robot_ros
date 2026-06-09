@@ -58,6 +58,9 @@ The system is based on the following main robot functions:
 - Sensor-based position referencing
 - ROS-based integration with VMX-Pi hardware
 
+<img width="1813" height="2099" alt="hospital_robot_diagram" src="https://github.com/user-attachments/assets/c18429eb-b8d5-4233-9dda-07e2bf911335" />
+
+
 ## Robot Platform
 
 The robot is composed of two main mechanical subsystems:
